@@ -203,7 +203,7 @@ article {
     background-size: cover;
     background-repeat: no-repeat;
     top: 0px;
-    left: 0px;
+    right: 0px;
     width: 100vw;
     height: 135vh;
     background-image: url("./gengar.gif");
