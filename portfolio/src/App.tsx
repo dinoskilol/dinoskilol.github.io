@@ -150,8 +150,8 @@ function App() {
 
       {/* Main Content */}
       <main className="main">
-        {/* Left: Projects + Blog */}
-        <div className="rightCol">
+        {/* Left: Projects + Blog + GitHub Activity */}
+        <div className="leftCol">
           {/* Projects */}
           <section className="section">
             <h2 className="sectionTitle">
@@ -216,41 +216,55 @@ function App() {
             </div>
           </section>
 
-          {/* Blog */}
-          <section className="section">
-            <h2 className="sectionTitle">
-              <Feather size={14} style={{ marginRight: '8px' }} />
-              Recent Posts
-            </h2>
-            <ul className="blogList">
-              {!QUARTZ_RSS_FEED_URL ? (
-                <li className="blogItem blogItemMuted">
-                  <span className="blogTitle">Set your RSS feed URL in App.tsx</span>
-                </li>
-              ) : isNotesLoading ? (
-                <li className="blogItem blogItemMuted">
-                  <span className="blogTitle">Loading…</span>
-                </li>
-              ) : notesError ? (
-                <li className="blogItem blogItemMuted">
-                  <span className="blogTitle">{notesError}</span>
-                </li>
-              ) : recentNotes.length === 0 ? (
-                <li className="blogItem blogItemMuted">
-                  <span className="blogTitle">No posts found</span>
-                </li>
-              ) : (
-                recentNotes.map((note) => (
-                  <li key={note.url} className="blogItem">
-                    <a className="blogLink" href={note.url} target="_blank" rel="noreferrer">
-                      <span className="blogTitle">{note.title}</span>
-                    </a>
-                    <span className="blogDate">{formatPublishedAt(note.publishedAt)}</span>
+          {/* Blog + GitHub Activity Side by Side */}
+          <div className="bottomSections">
+            {/* Blog */}
+            <section className="section">
+              <h2 className="sectionTitle">
+                <Feather size={14} style={{ marginRight: '8px' }} />
+                Recent Posts
+              </h2>
+              <ul className="blogList">
+                {!QUARTZ_RSS_FEED_URL ? (
+                  <li className="blogItem blogItemMuted">
+                    <span className="blogTitle">Set your RSS feed URL in App.tsx</span>
                   </li>
-                ))
-              )}
-            </ul>
-          </section>
+                ) : isNotesLoading ? (
+                  <li className="blogItem blogItemMuted">
+                    <span className="blogTitle">Loading…</span>
+                  </li>
+                ) : notesError ? (
+                  <li className="blogItem blogItemMuted">
+                    <span className="blogTitle">{notesError}</span>
+                  </li>
+                ) : recentNotes.length === 0 ? (
+                  <li className="blogItem blogItemMuted">
+                    <span className="blogTitle">No posts found</span>
+                  </li>
+                ) : (
+                  recentNotes.map((note) => (
+                    <li key={note.url} className="blogItem">
+                      <a className="blogLink" href={note.url} target="_blank" rel="noreferrer">
+                        <span className="blogTitle">{note.title}</span>
+                      </a>
+                      <span className="blogDate">{formatPublishedAt(note.publishedAt)}</span>
+                    </li>
+                  ))
+                )}
+              </ul>
+            </section>
+
+            {/* GitHub Activity */}
+            <section className="section">
+              <h2 className="sectionTitle">
+                <Github size={14} style={{ marginRight: '8px' }} />
+                GitHub Activity
+              </h2>
+              <div className="activityPlaceholder">
+                <p>Coming soon...</p>
+              </div>
+            </section>
+          </div>
         </div>
 
         {/* Right: Hero */}
