@@ -1,7 +1,7 @@
 import './App.css'
 
 import { useEffect, useMemo, useState } from 'react'
-import { BookOpen, Code, ExternalLink, Feather, Github } from 'lucide-react'
+import { BookOpen, ChevronRight, Code, ExternalLink, Feather, Github } from 'lucide-react'
 
 import { fetchRecentQuartzNotes, type RecentNote } from './lib/quartzRss'
 
@@ -41,7 +41,7 @@ const PROJECTS = [
     title: '/Inventory-Manager',
     subtitle: 'Final project',
     tags: ['Web', 'Fullstack'],
-    techs: ['C++', 'React', 'Typescript'],
+    techs: ['C++', 'React', 'Typescript', 'SQLite'],
     color: '#a78bfa',
     links: {
       project: '#',
@@ -53,6 +53,31 @@ const PROJECTS = [
 
 
 const QUARTZ_RSS_FEED_URL = 'https://dinoskilol.github.io/Dinonomicon/index.xml'
+
+function calculateAge(birthDate: string): number {
+  const [day, month, year] = birthDate.split(' ').map(Number)
+  const today = new Date()
+  let age = today.getFullYear() - year
+  const hasHadBirthdayThisYear = 
+    today.getMonth() + 1 > month || 
+    (today.getMonth() + 1 === month && today.getDate() >= day)
+  if (!hasHadBirthdayThisYear) age--
+  return age
+}
+
+function getDaysUntilBirthday(birthDate: string): number {
+  const [day, month] = birthDate.split(' ').map(Number)
+  const today = new Date()
+  let nextBirthday = new Date(today.getFullYear(), month - 1, day)
+  
+  // If birthday has already passed this year, get next year's birthday
+  if (today > nextBirthday) {
+    nextBirthday = new Date(today.getFullYear() + 1, month - 1, day)
+  }
+  
+  const timeDiff = nextBirthday.getTime() - today.getTime()
+  return Math.ceil(timeDiff / (1000 * 60 * 60 * 24))
+}
 
 function formatPublishedAt(date: Date) {
   const time = date.getTime()
@@ -232,10 +257,35 @@ function App() {
         <section className="hero">
 
           <h1 className="heroTitle">Hi, I'm Dino.</h1>
-          <p className="heroSubtitle">Intern Software Developer</p>
-          <p className="heroDesc">
-            I build clean, reliable software with a focus on clarity, structure, and usability.
+          <p className="heroSubtitle">
+            <ChevronRight size={12} />
+            Intern Software Developer<span className="textCursor">|</span>
           </p>
+          <p className="heroDesc">
+            I build <span className="scribblyText">
+              clean, reliable software
+              <svg className="scribblyUnderline" viewBox="0 0 240 20" preserveAspectRatio="none">
+                <path d="M0,15 L240,15" fill="none" stroke="var(--link)" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </span> with a focus on design, structure, and usability.
+
+            <br />
+            <br />
+            I am <span className="language" data-title={`I will turn 25 in ${getDaysUntilBirthday('16 01 2001')} days`}>{calculateAge('16 01 2001')}</span> years old and speak{' '}
+            <span className="language" data-title="Native">
+              Italian
+            </span>
+            , <span className="language" data-title="Fluent">German</span> and{' '}
+            <span className="language" data-title="Fluent">English</span>. <br />
+            <br />
+            I love to write and document about everything I care about, then post about it on my <a href="https://dinoskilol.github.io/Dinonomicon/" className="heroLink" target="_blank" rel="noreferrer">blog</a>.
+          <br />
+            <br />
+            I am currently in the 3rd year of my internship @ <a href="https://de.wikipedia.org/wiki/M%C3%BChlbauer_Holding" className="heroLink" target="_blank" rel="noreferrer">Mühlbauer Automation GmbH</a> as a Software Developer.
+            <br />
+            <br />
+            Interested in hiring me? Check out my resume!
+            </p>
           <div className="heroLinks">
             <a href="#" className="heroLink">GitHub</a>
             <a href="#" className="heroLink">LinkedIn</a>

@@ -107,6 +107,25 @@
   letter-spacing: 0.1em;
   color: var(--text-muted, var(--text));
   font-family: var(--font-mono, var(--font-family));
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+@keyframes blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+.textCursor {
+  display: inline-block;
+  animation: blink 1s infinite;
+  color: var(--link);
+  font-family: var(--font-mono, var(--font-family));
 }
 
 .heroDesc {
@@ -117,6 +136,89 @@
   color: var(--text-muted, var(--text));
 }
 
+.scribblyText {
+  position: relative;
+  display: inline-block;
+}
+
+.scribblyUnderline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 18px;
+  pointer-events: none;
+  transform: skewY(0deg);
+}
+
+.highlighted {
+  position: relative;
+  background: linear-gradient(120deg, color-mix(in srgb, var(--link) 30%, transparent), color-mix(in srgb, var(--link-hover) 40%, transparent));
+  padding: 3px 9px;
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  font-style: italic;
+}
+
+.language {
+  position: relative;
+  border-bottom: 2px dotted var(--link, var(--text));
+  cursor: url("https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/671251b212e6b71494aa67ff_cursor-pointer%402x.svg")
+    12 0,
+  pointer;
+  transition: all 0.15s ease;
+  display: inline-block;
+}
+
+.language:hover {
+  color: var(--link-hover, var(--link, var(--text)));
+}
+
+.language::after {
+  content: attr(data-title);
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface, var(--bg));
+  border: 1px solid var(--border, var(--text));
+  color: var(--text);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.language::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 6px;
+  height: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-left: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 1000;
+}
+
+.language:hover::after,
+.language:hover::before {
+  opacity: 1;
+}
+
 .heroLinks {
   display: flex;
   gap: 12px;
@@ -124,7 +226,7 @@
 }
 
 .heroLink {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--link, var(--text));
   text-decoration: none;
   transition: color 0.15s ease;
