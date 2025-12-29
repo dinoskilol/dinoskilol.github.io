@@ -1,0 +1,11 @@
+:root {
+  --bg: #f6f7fb;
+  --text: rgba(0, 0, 0, 0.86);
+  --grid-dot: rgba(0, 0, 0, 0.10);
+
+  --surface: rgba(0, 0, 0, 0.04);
+  --border: rgba(0, 0, 0, 0.14);
+
+  --button-bg: rgba(0, 0, 0, 0.06);
+  --button-bg-hover: rgba(0, 0, 0, 0.10);
+}

@@ -1,0 +1,89 @@
+
+.app {
+	min-height: 100vh;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-end;
+	padding: 16px;
+}
+
+.themeButton {
+	appearance: none;
+	border: 1px solid var(--border);
+	background: var(--button-bg);
+	color: var(--text);
+	padding: 10px 12px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.themeButton:hover {
+	background: var(--button-bg-hover);
+}
+
+.modalOverlay {
+	position: fixed;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+	width: min(520px, calc(100vw - 24px));
+	border: 1px solid var(--border);
+	background: var(--surface);
+	border-radius: 14px;
+	padding: 14px;
+	color: var(--text);
+	backdrop-filter: blur(8px);
+}
+
+.modalHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid var(--border);
+}
+
+.modalTitle {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.iconButton {
+	appearance: none;
+	border: 1px solid var(--border);
+	background: transparent;
+	color: var(--text);
+	padding: 8px 10px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.iconButton:hover {
+	background: var(--button-bg-hover);
+}
+
+.modalBody {
+	padding-top: 12px;
+	display: grid;
+	gap: 10px;
+}
+
+.themeOption {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 12px;
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	background: transparent;
+	cursor: pointer;
+}
+
+.themeOption:hover {
+	background: var(--button-bg);
+}
