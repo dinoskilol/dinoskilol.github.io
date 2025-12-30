@@ -1,7 +1,7 @@
 import './App.css'
 
 import { useEffect, useMemo, useState } from 'react'
-import { BookOpen, ChevronRight, Code, ExternalLink, Feather, Github, MapPin } from 'lucide-react'
+import { BookOpen, ChevronRight, Code, ExternalLink, Feather, Github, MapPin, Palette } from 'lucide-react'
 
 import { fetchRecentQuartzNotes, type RecentNote } from './lib/quartzRss'
 import GithubActivityCalendar from './lib/GithubActivityCalendar'
@@ -52,8 +52,26 @@ const PROJECTS = [
       docs: '#',
     },
   },
+
 ]
 
+
+const DESIGNS = [
+  {
+    title: 'PowerPoint Template',
+    category: 'Presentation',
+    description: 'Modern minimalist slide deck',
+    color: '#a78bfa',
+    previewUrl: '#',
+  },
+  {
+    title: 'Dashboard UI',
+    category: 'Frontend',
+    description: 'Analytics dashboard concept',
+    color: '#a78bfa',
+    previewUrl: '#',
+  }
+]
 
 const QUARTZ_RSS_FEED_URL = 'https://dinoskilol.github.io/Dinonomicon/index.xml'
 
@@ -146,11 +164,6 @@ function App() {
 
   return (
     <div className="app">
-      {/* Theme Button */}
-      <button className="themeButton" type="button" onClick={() => setIsThemeModalOpen(true)}>
-        {themeLabel}
-      </button>
-
       {/* Main Content */}
       <main className="main">
         {/* Left: Projects + Blog + GitHub Activity */}
@@ -162,7 +175,7 @@ function App() {
               Projects
               <div className="sectionTitleLine"></div>
             </h2>
-            <div className="projects">
+            <div className="projects scrollableSection">
               {PROJECTS.map((p) => (
                 <article key={p.title} className="projectCard" style={{ '--card-accent': p.color } as React.CSSProperties}>
                   <div className="projectActions">
@@ -214,6 +227,29 @@ function App() {
                       <span className="projectName">{p.title}</span>
                       <span className="projectSubtitle">{p.subtitle}</span>
                     </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          {/* Designs */}
+          <section className="section">
+            <h2 className="sectionTitle">
+              <Palette size={14} style={{ marginRight: '8px' }} />
+              Designs
+              <div className="sectionTitleLine"></div>
+            </h2>
+            <div className="designs scrollableSection">
+              {DESIGNS.map((d) => (
+                <article key={d.title} className="designCard" style={{ '--card-accent': d.color } as React.CSSProperties}>
+                  <div className="designPreview">
+                    <ExternalLink size={20} className="designPreviewIcon" />
+                  </div>
+                  <div className="designInfo">
+                    <span className="designCategory">{d.category}</span>
+                    <span className="designTitle">{d.title}</span>
+                    <span className="designDescription">{d.description}</span>
                   </div>
                 </article>
               ))}
@@ -323,34 +359,6 @@ function App() {
           <SocialLinks />
         </section>
       </main>
-
-      {/* Theme Modal */}
-      {isThemeModalOpen && (
-        <div className="modalOverlay" role="dialog" aria-modal="true" aria-label="Theme settings" onClick={() => setIsThemeModalOpen(false)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modalHeader">
-              <div className="modalTitle">Theme</div>
-              <button className="iconButton" type="button" onClick={() => setIsThemeModalOpen(false)}>
-                ✕
-              </button>
-            </div>
-            <div className="modalBody">
-              {THEMES.map((t) => (
-                <label key={t.id} className="themeOption">
-                  <input
-                    type="radio"
-                    name="theme"
-                    value={t.id}
-                    checked={themeId === t.id}
-                    onChange={() => onThemeChange(t.id)}
-                  />
-                  <span>{t.label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
