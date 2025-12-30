@@ -6,6 +6,7 @@ import { BookOpen, ChevronRight, Code, ExternalLink, Feather, Github, MapPin } f
 import { fetchRecentQuartzNotes, type RecentNote } from './lib/quartzRss'
 import GithubActivityCalendar from './lib/GithubActivityCalendar'
 import MapComponent from './lib/MapComponent'
+import SocialLinks from './lib/SocialLinks'
 
 type ThemeId = 'dark' | 'light'
 
@@ -294,11 +295,6 @@ function App() {
             Software Developer Intern<span className="textCursor">|</span>
             
           </p>
-          <p className="heroSubtitle">
-            <ChevronRight size={12} />
-            UI Designer<span className="textCursor">|</span>
-            
-          </p>
           <p className="heroDesc">
             I build <span className="scribblyText">
               clean, reliable software
@@ -324,11 +320,7 @@ function App() {
             <br />
             Interested in hiring me? Check out my resume!
             </p>
-          <div className="heroLinks">
-            <a href="#" className="heroLink">GitHub</a>
-            <a href="#" className="heroLink">LinkedIn</a>
-            <a href="#" className="heroLink">Email</a>
-          </div>
+          <SocialLinks />
         </section>
       </main>
 
