@@ -1,6 +1,13 @@
 /* ───────────────────────────────────────────────────────────────
    Layout – full viewport, no scroll
    ─────────────────────────────────────────────────────────────── */
+
+/* Text selection styling */
+::selection {
+  background-color: #7c3aed;
+  color: white;
+}
+
 .app {
   height: 100vh;
   overflow: hidden;
@@ -20,8 +27,8 @@
   position: fixed;
   bottom: -220px;
   right: -290px;
-  width: 900px;
-  height: 900px;
+  width: 800px;
+  height: 800px;
   background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4f39262b-f3d1-4854-86d5-052527f033fc/djb9hmv-ef1feb51-9804-4740-a3d1-2b6c1d21518f.png/v1/fill/w_1280,h_1059/jurassic_world_the_game___rexy_transparent_png_by_stiggo_stygimoloch_djb9hmv-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA1OSIsInBhdGgiOiIvZi80ZjM5MjYyYi1mM2QxLTQ4NTQtODZkNS0wNTI1MjdmMDMzZmMvZGpiOWhtdi1lZjFmZWI1MS05ODA0LTQ3NDAtYTNkMS0yYjZjMWQyMTUxOGYucG5nIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.wT6cenH0kEO8FPHsRtUPfRVuEGUaKt4dKbTJ7lHrff4");
   background-size: contain;
   background-repeat: no-repeat;
