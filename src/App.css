@@ -57,16 +57,121 @@
 }
 
 .bottomSections {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.middleCol {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
+
+.splitRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.bottomSections > section {
+  width: 100%;
+}
+
+.githubCalendar {
+  border-radius: 16px;
+  padding: 0 14px; /* Remove top/bottom padding to bring it closer to title */
+  display: flex;
+  flex-direction: column;
+  min-height: auto;
+  overflow: hidden;
+}
+
+.githubCalendarContent {
+  flex: 1;
+  width: 100%;
+  min-height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+
+.githubCalendarContent .calendar {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Force the generated SVG to fit the container width */
+.js-calendar-graph svg,
+.js-calendar-graph-svg {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+/* Ensure the library's wrapper doesn't force a scrollbar */
+.js-calendar-graph {
+  overflow: hidden !important;
+  width: 100% !important;
+  height: auto !important;
+  padding: 0 !important;
+}
+
+.githubCalendarStatus {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted, var(--text));
+  text-align: center;
+}
+
+.githubCalendarSvg {
+  width: 100%;
+}
+
+.githubCalendarSvg svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.githubCalendarCustomOverrides {
+  width: 100%;
+}
+
+.githubCalendar .calendar {
+  width: 100%;
+  max-width: none;
+}
+
+.githubCalendar .calendar-graph text.wday,
+.githubCalendar .calendar-graph text.month {
+  display: none !important;
+}
+
+.githubCalendar .contrib-column,
+.githubCalendar .contrib-footer,
+.githubCalendar .left.text-muted,
+.githubCalendar .float-right,
+.githubCalendar .monospace,
+.githubCalendar .contrib-legend,
+.githubCalendar .summary,
+.githubCalendar .calendar-graph svg text,
+.githubCalendar .calendar-graph svg g:nth-child(1),
+.githubCalendar .calendar-graph svg g:nth-child(2),
+.githubCalendar .calendar-graph .float-right,
+.githubCalendar .calendar-graph legend,
+.githubCalendar .calendar .svg-spinner,
+.githubCalendar .calendar .spinner,
+.githubCalendar .calendar .js-contrib[type="skip"],
+.githubCalendar .calendar .calendar-graph td:nth-child(1) span {
+  display: none !important;
+}
+
+.githubCalendar .calendar {
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+
 
 /* ───────────────────────────────────────────────────────────────
    Hero Section
@@ -274,6 +379,22 @@
   color: var(--text-muted, var(--text));
   display: flex;
   align-items: center;
+}
+
+.sectionTitleLine {
+  flex: 1;
+  margin: 0 12px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--text-muted, var(--text)) 50%, transparent);
+  opacity: 0.4;
+}
+
+.sectionDate {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted, var(--text));
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 /* ───────────────────────────────────────────────────────────────
@@ -531,4 +652,12 @@
 
 .themeOption:hover {
   background: var(--button-bg);
+}
+/* Hide Leaflet attribution link */
+.leaflet-control-attribution a[href^='https://leafletjs.com'] {
+  display: none !important;
+}
+/* Hide the separator that might be left behind */
+.leaflet-control-attribution svg {
+  display: none !important;
 }

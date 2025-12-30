@@ -1,9 +1,11 @@
 import './App.css'
 
 import { useEffect, useMemo, useState } from 'react'
-import { BookOpen, ChevronRight, Code, ExternalLink, Feather, Github } from 'lucide-react'
+import { BookOpen, ChevronRight, Code, ExternalLink, Feather, Github, MapPin } from 'lucide-react'
 
 import { fetchRecentQuartzNotes, type RecentNote } from './lib/quartzRss'
+import GithubActivityCalendar from './lib/GithubActivityCalendar'
+import MapComponent from './lib/MapComponent'
 
 type ThemeId = 'dark' | 'light'
 
@@ -26,8 +28,8 @@ const PROJECTS = [
     },
   },
   {
-    title: '/Azubi-Tools',
-    subtitle: 'Tools for Azubis',
+    title: '/Azubot',
+    subtitle: 'Tools & resources for Azubis',
     tags: ['Web', 'Tool'],
     techs: ['React', 'TypeScript', 'Vite'],
     color: '#a78bfa',
@@ -125,7 +127,7 @@ function App() {
       try {
         const notes = await fetchRecentQuartzNotes(QUARTZ_RSS_FEED_URL)
         if (isCancelled) return
-        setRecentNotes(notes.slice(0, 3))
+        setRecentNotes(notes.slice(0, 4))
       } catch (err) {
         if (isCancelled) return
         setNotesError(err instanceof Error ? err.message : 'Failed to load notes')
@@ -157,6 +159,7 @@ function App() {
             <h2 className="sectionTitle">
               <Code size={14} style={{ marginRight: '8px' }} />
               Projects
+              <div className="sectionTitleLine"></div>
             </h2>
             <div className="projects">
               {PROJECTS.map((p) => (
@@ -216,53 +219,68 @@ function App() {
             </div>
           </section>
 
-          {/* Blog + GitHub Activity Side by Side */}
+          {/* Blog + Map + GitHub Activity */}
           <div className="bottomSections">
-            {/* Blog */}
-            <section className="section">
-              <h2 className="sectionTitle">
-                <Feather size={14} style={{ marginRight: '8px' }} />
-                Recent Posts
-              </h2>
-              <ul className="blogList">
-                {!QUARTZ_RSS_FEED_URL ? (
-                  <li className="blogItem blogItemMuted">
-                    <span className="blogTitle">Set your RSS feed URL in App.tsx</span>
-                  </li>
-                ) : isNotesLoading ? (
-                  <li className="blogItem blogItemMuted">
-                    <span className="blogTitle">Loading…</span>
-                  </li>
-                ) : notesError ? (
-                  <li className="blogItem blogItemMuted">
-                    <span className="blogTitle">{notesError}</span>
-                  </li>
-                ) : recentNotes.length === 0 ? (
-                  <li className="blogItem blogItemMuted">
-                    <span className="blogTitle">No posts found</span>
-                  </li>
-                ) : (
-                  recentNotes.map((note) => (
-                    <li key={note.url} className="blogItem">
-                      <a className="blogLink" href={note.url} target="_blank" rel="noreferrer">
-                        <span className="blogTitle">{note.title}</span>
-                      </a>
-                      <span className="blogDate">{formatPublishedAt(note.publishedAt)}</span>
+            <div className="splitRow">
+              {/* Blog */}
+              <section className="section">
+                <h2 className="sectionTitle">
+                  <Feather size={14} style={{ marginRight: '8px' }} />
+                  Recent Posts
+                  <div className="sectionTitleLine"></div>
+                </h2>
+                <ul className="blogList">
+                  {!QUARTZ_RSS_FEED_URL ? (
+                    <li className="blogItem blogItemMuted">
+                      <span className="blogTitle">Set your RSS feed URL in App.tsx</span>
                     </li>
-                  ))
-                )}
-              </ul>
-            </section>
+                  ) : isNotesLoading ? (
+                    <li className="blogItem blogItemMuted">
+                      <span className="blogTitle">Loading…</span>
+                    </li>
+                  ) : notesError ? (
+                    <li className="blogItem blogItemMuted">
+                      <span className="blogTitle">{notesError}</span>
+                    </li>
+                  ) : recentNotes.length === 0 ? (
+                    <li className="blogItem blogItemMuted">
+                      <span className="blogTitle">No posts found</span>
+                    </li>
+                  ) : (
+                    recentNotes.map((note) => (
+                      <li key={note.url} className="blogItem">
+                        <a className="blogLink" href={note.url} target="_blank" rel="noreferrer">
+                          <span className="blogTitle">{note.title}</span>
+                        </a>
+                        <span className="blogDate">{formatPublishedAt(note.publishedAt)}</span>
+                      </li>
+                    ))
+                  )}
+                </ul>
+              </section>
+
+              {/* Map */}
+              <section className="section">
+                <h2 className="sectionTitle">
+                  <MapPin size={14} style={{ marginRight: '8px' }} />
+                  Map
+                  <div className="sectionTitleLine"></div>
+                </h2>
+                <div style={{ height: '100%', minHeight: '200px', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)' }}>
+                  <MapComponent />
+                </div>
+              </section>
+            </div>
 
             {/* GitHub Activity */}
             <section className="section">
               <h2 className="sectionTitle">
                 <Github size={14} style={{ marginRight: '8px' }} />
                 GitHub Activity
+                <div className="sectionTitleLine"></div>
+                <small className="sectionDate">Last 12 months</small>
               </h2>
-              <div className="activityPlaceholder">
-                <p>Coming soon...</p>
-              </div>
+              <GithubActivityCalendar username="dinoskilol" />
             </section>
           </div>
         </div>
@@ -273,7 +291,13 @@ function App() {
           <h1 className="heroTitle">Hi, I'm Dino.</h1>
           <p className="heroSubtitle">
             <ChevronRight size={12} />
-            Intern Software Developer<span className="textCursor">|</span>
+            Software Developer Intern<span className="textCursor">|</span>
+            
+          </p>
+          <p className="heroSubtitle">
+            <ChevronRight size={12} />
+            UI Designer<span className="textCursor">|</span>
+            
           </p>
           <p className="heroDesc">
             I build <span className="scribblyText">
