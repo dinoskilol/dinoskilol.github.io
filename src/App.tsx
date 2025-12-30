@@ -1,6 +1,6 @@
 import './App.css'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BookOpen, ChevronRight, Code, ExternalLink, Feather, Github, MapPin, Palette } from 'lucide-react'
 
 import { fetchRecentQuartzNotes, type RecentNote } from './lib/quartzRss'
@@ -117,22 +117,19 @@ function applyTheme(themeId: ThemeId) {
 }
 
 function App() {
-  const [isThemeModalOpen, setIsThemeModalOpen] = useState(false)
-  const [themeId, setThemeId] = useState<ThemeId>('dark')
+  const [, setThemeId] = useState<ThemeId>('dark')
 
   const [recentNotes, setRecentNotes] = useState<RecentNote[]>([])
   const [notesError, setNotesError] = useState<string | null>(null)
   const [isNotesLoading, setIsNotesLoading] = useState(false)
 
-  const themeLabel = useMemo(
-    () => THEMES.find((t) => t.id === themeId)?.label ?? 'Theme',
-    [themeId],
-  )
-
-  function onThemeChange(nextThemeId: ThemeId) {
+  function applyThemeOnChange(nextThemeId: ThemeId) {
     setThemeId(nextThemeId)
     applyTheme(nextThemeId)
   }
+
+  // Keep theme change function available for future use
+  void applyThemeOnChange
 
   useEffect(() => {
     let isCancelled = false
