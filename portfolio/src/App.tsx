@@ -290,7 +290,7 @@ function App() {
               Italian
             </span>
             , <span className="language" data-title="Fluent">German</span> and{' '}
-            <span className="language" data-title="Fluent">English</span>. <br />
+            <span className="language" data-title="Fluent">English</span>. Currently learning <span className="language" data-title="For my GF :)">Hungarian</span>! <br />
             <br />
             I love to write and document about everything I care about, then post about it on my <a href="https://dinoskilol.github.io/Dinonomicon/" className="heroLink" target="_blank" rel="noreferrer">blog</a>.
           <br />
