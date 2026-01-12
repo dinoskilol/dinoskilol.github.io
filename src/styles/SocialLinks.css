@@ -5,6 +5,7 @@
   gap: 12px;
   margin-top: 16px;
   margin-bottom: 0;
+  flex-wrap: wrap;
 }
 
 .social-links a {
@@ -27,4 +28,22 @@
 .social-links svg {
   width: 24px;
   height: 24px;
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 480px) {
+  .social-links {
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .social-links a {
+    width: 22px;
+    height: 22px;
+  }
+
+  .social-links svg {
+    width: 22px;
+    height: 22px;
+  }
 }

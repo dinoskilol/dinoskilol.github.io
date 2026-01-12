@@ -9,8 +9,9 @@
 }
 
 .app {
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   padding: 16px 40px;
@@ -25,10 +26,10 @@
 .app::after {
   content: "";
   position: fixed;
-  bottom: -220px;
-  right: -290px;
-  width: 800px;
-  height: 800px;
+  bottom: -180px;
+  right: -240px;
+  width: min(500px, 40vw);
+  height: min(500px, 40vw);
   background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4f39262b-f3d1-4854-86d5-052527f033fc/djb9hmv-ef1feb51-9804-4740-a3d1-2b6c1d21518f.png/v1/fill/w_1280,h_1059/jurassic_world_the_game___rexy_transparent_png_by_stiggo_stygimoloch_djb9hmv-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA1OSIsInBhdGgiOiIvZi80ZjM5MjYyYi1mM2QxLTQ4NTQtODZkNS0wNTI1MjdmMDMzZmMvZGpiOWhtdi1lZjFmZWI1MS05ODA0LTQ3NDAtYTNkMS0yYjZjMWQyMTUxOGYucG5nIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.wT6cenH0kEO8FPHsRtUPfRVuEGUaKt4dKbTJ7lHrff4");
   background-size: contain;
   background-repeat: no-repeat;
@@ -36,6 +37,7 @@
   transform: scaleX(-1);
   pointer-events: none;
   z-index: 0;
+  opacity: 0.5;
 }
 
 /* ───────────────────────────────────────────────────────────────
@@ -73,18 +75,24 @@
   gap: 48px;
   align-items: start;
   padding-top: 20px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .leftCol {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .bottomSections {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .splitRow {
@@ -92,10 +100,13 @@
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   align-items: stretch;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .bottomSections > section {
   width: 100%;
+  min-width: 0;
 }
 
 .githubCalendar {
@@ -105,6 +116,8 @@
   flex-direction: column;
   min-height: auto;
   overflow: hidden;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .githubCalendarContent {
@@ -205,6 +218,8 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .badge {
@@ -280,8 +295,10 @@
   margin: 8px 0 0;
   font-size: 15px;
   line-height: 1.55;
-  max-width: 360px;
+  max-width: min(360px, 100%);
   color: var(--text-muted, var(--text));
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .scribblyText {
@@ -394,6 +411,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .sectionTitle {
@@ -543,6 +562,8 @@
   font-size: 17px;
   font-weight: 600;
   font-family: var(--font-mono, var(--font-family));
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .projectTitleRow {
@@ -594,6 +615,8 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .blogItem {
@@ -604,6 +627,8 @@
   border-radius: 10px;
   background: transparent;
   transition: background 0.12s ease;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .blogItemMuted {
@@ -616,6 +641,8 @@
 
 .blogTitle {
   font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .blogLink {
@@ -624,6 +651,9 @@
   cursor: url("https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/671251b212e6b71494aa67ff_cursor-pointer%402x.svg")
     12 0,
   pointer;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .activityPlaceholder {
@@ -641,6 +671,7 @@
 .blogDate {
   font-size: 12px;
   color: var(--text-muted, var(--text));
+  flex-shrink: 0;
 }
 
 /* ───────────────────────────────────────────────────────────────
@@ -816,4 +847,471 @@
 /* Hide the separator that might be left behind */
 .leaflet-control-attribution svg {
   display: none !important;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   RESPONSIVE DESIGN
+   ─────────────────────────────────────────────────────────────── */
+
+/* Surface Pro and similar high-DPI displays (1500px and below) */
+@media screen and (max-width: 1500px) {
+  .app::after {
+    width: min(400px, 30vw);
+    height: min(400px, 30vw);
+    bottom: -120px;
+    right: -150px;
+    opacity: 0.4;
+  }
+}
+
+/* Large tablets and small laptops (1200px and below) */
+@media screen and (max-width: 1200px) {
+  .main {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 32px;
+  }
+
+  .app::after {
+    width: min(350px, 28vw);
+    height: min(350px, 28vw);
+    bottom: -100px;
+    right: -120px;
+    opacity: 0.35;
+  }
+}
+
+/* Large tablets and small laptops (1024px and below) */
+@media screen and (max-width: 1024px) {
+  .app {
+    padding: 16px 24px;
+  }
+
+  .main {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .hero {
+    order: -1;
+  }
+
+  .splitRow {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .projectCard {
+    flex: 0 0 48%;
+    width: 48%;
+  }
+
+  .designCard {
+    flex: 0 0 calc(50% - 5px);
+    width: calc(50% - 5px);
+  }
+
+  .app::after {
+    width: min(300px, 25vw);
+    height: min(300px, 25vw);
+    bottom: -80px;
+    right: -100px;
+    opacity: 0.3;
+  }
+}
+
+/* Tablets (768px and below) */
+@media screen and (max-width: 768px) {
+  .app {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 16px 20px 40px;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  .main {
+    gap: 28px;
+    padding-top: 10px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .leftCol,
+  .hero {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .splitRow {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .projectCard {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 160px;
+  }
+
+  .designCard {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .scrollableSection {
+    max-height: none;
+    overflow-y: visible;
+    width: 100%;
+  }
+
+  .heroTitle {
+    font-size: clamp(32px, 10vw, 52px);
+  }
+
+  .heroDesc {
+    max-width: 100%;
+  }
+
+  .themeButton {
+    top: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .app::after {
+    width: min(250px, 40vw);
+    height: min(250px, 40vw);
+    bottom: -60px;
+    right: -80px;
+    opacity: 0.25;
+  }
+
+  .githubCalendar {
+    padding: 0 8px;
+  }
+
+  .blogItem {
+    padding: 10px 12px;
+  }
+
+  .modal {
+    width: calc(100vw - 24px);
+    margin: 12px;
+  }
+}
+
+/* Mobile phones (480px and below) */
+@media screen and (max-width: 480px) {
+  .app {
+    padding: 12px 16px 32px;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  .main {
+    gap: 24px;
+    padding-top: 8px;
+    width: 100%;
+  }
+
+  .hero {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .heroTitle {
+    font-size: clamp(28px, 12vw, 42px);
+    word-break: break-word;
+  }
+
+  .heroSubtitle {
+    font-size: 11px;
+    flex-wrap: wrap;
+  }
+
+  .heroDesc {
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  .heroLinks {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .badge {
+    font-size: 10px;
+    padding: 5px 8px;
+  }
+
+  .section {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .sectionTitle {
+    font-size: 11px;
+  }
+
+  .projects,
+  .designs {
+    width: 100%;
+  }
+
+  .projectCard {
+    padding: 10px 12px;
+    min-height: 140px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .projectName {
+    font-size: 15px;
+  }
+
+  .projectTitleRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    max-width: 100%;
+  }
+
+  .projectSubtitle {
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .projectActions {
+    top: 10px;
+    right: 10px;
+    gap: 8px;
+  }
+
+  .projectTechs {
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .techBadge {
+    font-size: 8px;
+    padding: 2px 6px;
+  }
+
+  .designCard {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .designPreview {
+    height: 80px;
+  }
+
+  .designInfo {
+    padding: 10px 12px;
+  }
+
+  .designTitle {
+    font-size: 14px;
+  }
+
+  .designDescription {
+    word-break: break-word;
+  }
+
+  .blogList {
+    width: 100%;
+  }
+
+  .blogTitle {
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  .blogDate {
+    font-size: 11px;
+  }
+
+  .blogItem {
+    padding: 8px 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    max-width: 100%;
+  }
+
+  .blogLink {
+    word-break: break-word;
+    max-width: 100%;
+  }
+
+  .splitRow {
+    width: 100%;
+  }
+
+  .bottomSections {
+    width: 100%;
+  }
+
+  .themeButton {
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .app::after {
+    width: min(180px, 35vw);
+    height: min(180px, 35vw);
+    bottom: -50px;
+    right: -50px;
+    opacity: 0.2;
+  }
+
+  .githubCalendar {
+    padding: 0 4px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .language::after {
+    font-size: 10px;
+    padding: 4px 8px;
+    max-width: 90vw;
+    white-space: normal;
+  }
+
+  .social-links {
+    gap: 10px;
+  }
+
+  .social-links a {
+    width: 22px;
+    height: 22px;
+  }
+
+  .social-links svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Very small screens (360px and below) */
+@media screen and (max-width: 360px) {
+  .app {
+    padding: 10px 12px 28px;
+  }
+
+  .heroTitle {
+    font-size: clamp(24px, 14vw, 36px);
+  }
+
+  .heroSubtitle {
+    font-size: 10px;
+  }
+
+  .heroDesc {
+    font-size: 13px;
+  }
+
+  .projectCard {
+    min-height: 130px;
+  }
+
+  .projectName {
+    font-size: 14px;
+  }
+
+  .app::after {
+    display: none;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media screen and (max-width: 900px) and (orientation: landscape) {
+  .app {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .main {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .hero {
+    order: 0;
+  }
+
+  .splitRow {
+    grid-template-columns: 1fr;
+  }
+
+  .projectCard {
+    flex: 0 0 48%;
+    width: 48%;
+  }
+}
+
+/* High resolution displays */
+@media screen and (min-width: 1440px) {
+  .app {
+    padding: 20px 60px;
+  }
+
+  .main {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .app {
+    padding: 24px 80px;
+  }
+
+  .main {
+    max-width: 1600px;
+  }
+
+  .heroTitle {
+    font-size: 80px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .projectCard:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .designCard:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .projectCard:active {
+    transform: scale(0.98);
+  }
+
+  .designCard:active {
+    transform: scale(0.98);
+  }
+
+  .language:hover::after,
+  .language:hover::before {
+    opacity: 0;
+  }
+
+  .language:active::after,
+  .language:active::before {
+    opacity: 1;
+  }
 }
