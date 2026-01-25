@@ -22,6 +22,7 @@ const PROJECTS = [
     tags: ['Web'],
     techs: ['Quartz', 'Obsidian', 'TypeScript'],
     color: '#a78bfa',
+    image: 'dinonomicon.png',
     links: {
       project: 'https://dinoskilol.github.io/Dinonomicon/',
       github: 'https://github.com/dinoskilol',
@@ -29,11 +30,12 @@ const PROJECTS = [
     },
   },
   {
-    title: '/Azubot',
-    subtitle: 'Tools & resources for Azubis',
-    tags: ['Web', 'Tool'],
-    techs: ['React', 'TypeScript', 'Vite'],
+    title: '/PS-Companion',
+    subtitle: 'AI Trophy aid',
+    tags: ['Tool'],
+    techs: ['Electron', 'psn-api'],
     color: '#a78bfa',
+    image: 'ps-companion.png',
     links: {
       project: '#',
       github: '#',
@@ -41,7 +43,7 @@ const PROJECTS = [
     },
   },
   {
-    title: '/Inventory-Manager',
+    title: '/Inv-Manager',
     subtitle: 'Final project',
     tags: ['Web', 'Fullstack'],
     techs: ['C++', 'React', 'Typescript', 'SQLite'],
@@ -174,7 +176,7 @@ function App() {
             </h2>
             <div className="projects scrollableSection">
               {PROJECTS.map((p) => (
-                <article key={p.title} className="projectCard" style={{ '--card-accent': p.color } as React.CSSProperties}>
+                <article key={p.title} className="projectCard" style={{ '--card-accent': p.color, backgroundImage: p.image ? `url(/assets/${p.image})` : undefined } as React.CSSProperties}>
                   <div className="projectActions">
                     <a
                       className="projectAction"
