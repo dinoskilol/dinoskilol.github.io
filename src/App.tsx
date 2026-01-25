@@ -176,7 +176,7 @@ function App() {
             </h2>
             <div className="projects scrollableSection">
               {PROJECTS.map((p) => (
-                <article key={p.title} className="projectCard" style={{ '--card-accent': p.color, backgroundImage: p.image ? `url(/assets/${p.image})` : undefined } as React.CSSProperties}>
+                <article key={p.title} className="projectCard" style={{ '--card-accent': p.color, backgroundImage: p.image ? `url(/assets/${p.image})` : undefined } as React.CSSProperties} onClick={() => p.links.project !== '#' && window.open(p.links.project, '_blank')}>
                   <div className="projectActions">
                     <a
                       className="projectAction"
