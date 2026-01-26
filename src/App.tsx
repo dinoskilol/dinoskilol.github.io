@@ -48,6 +48,7 @@ const PROJECTS = [
     tags: ['Web', 'Fullstack'],
     techs: ['C++', 'React', 'Typescript', 'SQLite'],
     color: '#a78bfa',
+    image: 'invmanager.png',
     links: {
       project: '#',
       github: '#',
