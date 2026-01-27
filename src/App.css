@@ -606,17 +606,14 @@
   overflow-wrap: break-word;
 }
 
-.projectTitleRow {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-}
-
 .projectSubtitle {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted, var(--text));
   white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+
 }
 
 .projectBottom {

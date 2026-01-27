@@ -31,7 +31,7 @@ const PROJECTS = [
   },
   {
     title: '/PS-Companion',
-    subtitle: 'AI Trophy aid',
+    subtitle: 'Trophy Hunting assistant with LLM integration',
     tags: ['Tool'],
     techs: ['Electron', 'psn-api'],
     color: '#a78bfa',
@@ -44,7 +44,7 @@ const PROJECTS = [
   },
   {
     title: '/Inv-Manager',
-    subtitle: 'Final project',
+    subtitle: 'Final internship project',
     tags: ['Web', 'Fullstack'],
     techs: ['C++', 'React', 'Typescript', 'SQLite'],
     color: '#a78bfa',
@@ -225,7 +225,7 @@ function App() {
                     </div>
                     <div className="projectTitleRow">
                       <span className="projectName">{p.title}</span>
-                      <span className="projectSubtitle">{p.subtitle}</span>
+                      <div className="projectSubtitle">{p.subtitle}</div>
                     </div>
                   </div>
                 </article>
